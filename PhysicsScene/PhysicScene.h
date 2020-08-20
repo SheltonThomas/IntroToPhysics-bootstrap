@@ -3,8 +3,8 @@
 #include "PhysicsObject.h"
 #include <vector>
 
-class PhysicScene
-{
+class PhysicScene{
+
 public:
 	PhysicScene();
 	~PhysicScene();
@@ -19,6 +19,8 @@ public:
 
 	void setTimStep(const float timeStep) { m_timeStep = timeStep; }
 	float getTimeStep() const { return m_timeStep; }
+
+	void debugScene();
 
 protected:
 	glm::vec2 m_gravity;
