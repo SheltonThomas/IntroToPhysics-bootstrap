@@ -6,7 +6,7 @@
 class Rocket : public Sphere{
 
 public:
-	Rocket(float fuel, float fuelWeight, float fuelUsageRate, glm::vec2 position, glm::vec2 velocity, float mass, float radius, glm::vec4 color);
+	Rocket(float power, float fuel, float fuelWeight, float fuelUsageRate, glm::vec2 position, glm::vec2 velocity, float mass, float radius, glm::vec4 color);
 	~Rocket() {}
 
 	void fixedUpdate(glm::vec2 gravity, float timeStep);
@@ -20,5 +20,6 @@ private:
 	float m_fuelUsageRate;
 	aie::Input* input = aie::Input::getInstance();
 	bool isBoosting = false;
+	float m_power = 0;
 };
 
