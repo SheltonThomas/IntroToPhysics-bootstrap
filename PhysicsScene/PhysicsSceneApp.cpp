@@ -3,7 +3,7 @@
 #include "Font.h"
 #include "Input.h"
 #include <Gizmos.h>
-#include "Sphere.h"
+#include "Rocket.h"
 
 PhysicsSceneApp::PhysicsSceneApp() {
 
@@ -25,11 +25,11 @@ bool PhysicsSceneApp::startup() {
 
 	m_physicsScene = new PhysicScene();
 	m_physicsScene->setTimStep(0.01f);
-	m_physicsScene->setGravity(glm::vec2(0.f, 0.f));
+	m_physicsScene->setGravity(glm::vec2(0.f, -15.f));
 
-	Sphere* ball;
-	ball = new Sphere(glm::vec2(-40.f, 0.f), glm::vec2(0.f, 0.f), 4.f, 4.f, glm::vec4(1, 0, 0, 1));
-	m_physicsScene->addActor(ball);
+	Rocket* rocket;
+	rocket = new Rocket(150.f, 0.5f, 5.f, glm::vec2(-40.f, 0.f), glm::vec2(0.f, 0.f), 4.f, 5.f, glm::vec4(1, 1, 0, 1));
+	m_physicsScene->addActor(rocket);
 
 	return true;
 }

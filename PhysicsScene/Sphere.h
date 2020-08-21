@@ -4,9 +4,11 @@ class Sphere : public RigidBody {
 
 public:
 	Sphere(glm::vec2 position, glm::vec2 velocity, float mass, float radius, glm::vec4 color);
-	~Sphere();
+	~Sphere() {}
 
 	virtual void makeGizmo();
+	
+	virtual void fixedUpdate(glm::vec2 gravity, float timeStep);
 
 	virtual bool checkCollision(PhysicsObject* otherActor);
 
