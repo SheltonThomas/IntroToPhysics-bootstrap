@@ -25,11 +25,17 @@ bool PhysicsSceneApp::startup() {
 
 	m_physicsScene = new PhysicScene();
 	m_physicsScene->setTimStep(0.01f);
-	m_physicsScene->setGravity(glm::vec2(0.f, -50.f));
+	m_physicsScene->setGravity(glm::vec2(0.f, 0.f));
 
-	Rocket* rocket;
+	/*Rocket* rocket;
 	rocket = new Rocket(20.f, 100.f, 1.f, 1.f, glm::vec2(-40.f, 0.f), glm::vec2(0.f, 0.f), 4.f, 5.f, glm::vec4(1, 1, 0, 1));
-	m_physicsScene->addActor(rocket);
+	m_physicsScene->addActor(rocket);*/
+
+	Sphere* ball1 = new Sphere(glm::vec2(-40, 0), glm::vec2(30, 0), 2, 3, glm::vec4(1, 0, 0, 1));
+	Sphere* ball2 = new Sphere(glm::vec2(40, 0), glm::vec2(-30, 0), 1, 3, glm::vec4(1, 0, 0, 1));
+
+	m_physicsScene->addActor(ball1);
+	m_physicsScene->addActor(ball2);
 
 	return true;
 }
