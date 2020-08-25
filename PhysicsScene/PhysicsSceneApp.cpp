@@ -23,11 +23,18 @@ bool PhysicsSceneApp::startup() {
 	// the following path would be used instead: "./font/consolas.ttf"
 	m_font = new aie::Font("../bin/font/consolas.ttf", 32);
 
-	m_physicsScene = new PhysicScene();
-	m_physicsScene->setTimStep(0.01f);
-	m_physicsScene->setGravity(glm::vec2(0.f, 0.f));
+	glm::vec2 gravity(0.f, -10.f);
+	glm::vec2 initialPosition(-40.f, 0.f);
+	glm::vec2 initialVelocity(25.f, 25.f);
 
-	setUpContinuousDemo(glm::vec2(-40.f, 0.f), glm::vec2(25.f, 25.f), 10.f);
+	m_physicsScene = new PhysicScene();
+	m_physicsScene->setTimStep(.01f);
+	m_physicsScene->setGravity(gravity);
+
+	setUpContinuousDemo(initialPosition, initialVelocity, gravity);
+
+	Sphere* ball = new Sphere(initialPosition, initialVelocity, 1.f, 1.f, glm::vec4(1.f, 0.f, .5f, 1.f));
+	m_physicsScene->addActor(ball);
 
 	return true;
 }
@@ -73,24 +80,23 @@ void PhysicsSceneApp::draw() {
 	m_2dRenderer->end();
 }
 
-void PhysicsSceneApp::setUpContinuousDemo(glm::vec2 initialPosition, glm::vec2 initialVelocity, float gravity){
+void PhysicsSceneApp::setUpContinuousDemo(glm::vec2 initialPosition, glm::vec2 initialVelocity, glm::vec2 gravity){
 
 	//Can use to calculate where something will be after a set amount of time.
 
 	float time = 0.f;
 	float timeStep = .5f;
-	float radius = 1.f;
+	float radius = 2.f;
 	int segments = 12;
 	glm::vec4 color = glm::vec4(1, 0, 0, 1);
 	glm::vec2 finalPosition = initialPosition;
 
-	while (time <= 5){
+	while (time <= timeStep * 10){
 
-		finalPosition.x = initialPosition.x + (initialVelocity.x * time);
-		finalPosition.y = (initialPosition.y + (initialVelocity.y * time)) + (.5f * -gravity * (time * time));
+		finalPosition.x = (initialPosition.x + (initialVelocity.x * time)) + (.5f * gravity.x * (time * time));
+		finalPosition.y = (initialPosition.y + (initialVelocity.y * time)) + (.5f * gravity.y * (time * time));
 
 		aie::Gizmos::add2DCircle(finalPosition, radius, segments, color);
 		time += timeStep;
 	}
 }
-
