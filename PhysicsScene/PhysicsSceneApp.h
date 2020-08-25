@@ -16,6 +16,8 @@ public:
 	virtual void update(float deltaTime);
 	virtual void draw();
 
+	void setUpContinuousDemo(glm::vec2 pos, glm::vec2 velocity, float gravity);
+
 protected:
 
 	aie::Renderer2D*	m_2dRenderer;
