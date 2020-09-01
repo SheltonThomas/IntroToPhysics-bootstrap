@@ -22,6 +22,13 @@ public:
 
 	void debugScene();
 
+	void checkForCollision();
+
+	static bool planeToPlane(PhysicsObject*, PhysicsObject*);
+	static bool planeToSphere(PhysicsObject*, PhysicsObject*);
+	static bool sphereToPlane(PhysicsObject*, PhysicsObject*);
+	static bool sphereToSphere(PhysicsObject*, PhysicsObject*);
+
 protected:
 	glm::vec2 m_gravity;
 	float m_timeStep;

@@ -4,6 +4,7 @@
 #include "Input.h"
 #include <Gizmos.h>
 #include "Rocket.h"
+#include "Plane.h"
 
 PhysicsSceneApp::PhysicsSceneApp() {
 
@@ -34,6 +35,9 @@ bool PhysicsSceneApp::startup() {
 	setUpContinuousDemo(initialPosition, initialVelocity, gravity);
 
 	Sphere* ball = new Sphere(initialPosition, initialVelocity, 1.f, 1.f, glm::vec4(1.f, 0.f, .5f, 1.f));
+	Plane* floor = new Plane(glm::normalize(glm::vec2(1.f, -6.f)), 20.f);
+
+	m_physicsScene->addActor(floor);
 	m_physicsScene->addActor(ball);
 
 	return true;
@@ -50,7 +54,7 @@ void PhysicsSceneApp::update(float deltaTime) {
 	// input example
 	aie::Input* input = aie::Input::getInstance();
 
-	//aie::Gizmos::clear();
+	aie::Gizmos::clear();
 
 	m_physicsScene->update(deltaTime);
 	m_physicsScene->updateGizmos();
