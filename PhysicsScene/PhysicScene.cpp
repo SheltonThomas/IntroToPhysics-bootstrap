@@ -1,17 +1,19 @@
 #include "PhysicScene.h"
-#include <list>
 #include "RigidBody.h"
-#include <iostream>
 #include "Sphere.h"
 #include "Plane.h"
+#include <list>
 
-PhysicScene::PhysicScene() : m_timeStep(0.01f), m_gravity(glm::vec2(0, 0)) {
+PhysicScene::PhysicScene(){
+
+	m_timeStep = .01f;
+	m_gravity = glm::vec2(0, 0);
 }
 
-PhysicScene::~PhysicScene() {
+PhysicScene::~PhysicScene(){
 
-	for (auto iActor : m_actors){
-		delete iActor;
+	for (auto actor : m_actors) {
+		delete actor;
 	}
 }
 
@@ -20,56 +22,33 @@ void PhysicScene::addActor(PhysicsObject* actor){
 	m_actors.push_back(actor);
 }
 
-void PhysicScene::removeActor(PhysicsObject* actor) {
-	
-	for (auto pActor = m_actors.begin(); pActor < m_actors.end(); ++pActor){
-		if (*pActor == actor){
-			m_actors.erase(pActor);
+void PhysicScene::removeActor(PhysicsObject* actor){
+
+	for (auto i = m_actors.begin(); i < m_actors.end(); i++) {
+		if (*i == actor) {
+			m_actors.erase(i);
 		}
 	}
 }
 
 void PhysicScene::update(float deltaTime){
 
-	/*static std::list<PhysicsObject*> dirty;*/
-
-	static float accumulatedTime = 0.f;
+	// store how much time has accumulated since last update
+	static float accumulatedTime = 0.0f;
 	accumulatedTime += deltaTime;
 
-	while (accumulatedTime >= m_timeStep){
-		for (auto pActor : m_actors){
+	// while enough time has accumulated...
+	while (accumulatedTime >= m_timeStep) {
+		// for each PhysicsObject in m_actors...
+		for (auto pActor : m_actors) {
+			// updated the physics of that object
 			pActor->fixedUpdate(m_gravity, m_timeStep);
 		}
-
+		// spend the time needed for that update
 		accumulatedTime -= m_timeStep;
+		// check for collisions
+		checkForCollision();
 	}
-
-	checkForCollision();
-
-	/*for (auto iActor : m_actors){
-		for (auto iOther : m_actors) {
-			if (iActor == iOther) 
-				continue;
-
-			if (std::find(dirty.begin(), dirty.end(), iActor) != dirty.end() &&
-				std::find(dirty.begin(), dirty.end(), iOther) != dirty.end())
-				continue;
-
-			RigidBody* actorRigid = dynamic_cast<RigidBody*>(iActor);
-			RigidBody* otherRigid = dynamic_cast<RigidBody*>(iOther);
-
-			if (!actorRigid || !otherRigid)
-				return;
-
-			if (actorRigid->checkCollision(iOther))
-			{
-				actorRigid->applyForceToActor(otherRigid, actorRigid->getVelocity() * actorRigid->getMass());
-				dirty.push_back(iActor);
-				dirty.push_back(iOther);
-			}
-		}
-	}
-	dirty.clear();*/
 }
 
 void PhysicScene::updateGizmos(){
@@ -81,15 +60,10 @@ void PhysicScene::updateGizmos(){
 
 void PhysicScene::debugScene(){
 
-	int count = 0;
-	for (auto iActor : m_actors)
-	{
-		std::cout << count << " : ";
-		iActor->debug();
-		count++;
+	for (auto actor : m_actors) {
+		actor->debug();
 	}
 }
-
 
 typedef bool(*fn)(PhysicsObject*, PhysicsObject*);
 
@@ -101,81 +75,82 @@ static fn collisionFunctions[] = {
 
 void PhysicScene::checkForCollision(){
 
+	// get the number of actors in the scene
 	int actorCount = m_actors.size();
 
+	// check for collisions against all objects except this one
 	for (int outer = 0; outer < actorCount - 1; outer++) {
-
 		for (int inner = outer + 1; inner < actorCount; inner++) {
-
 			PhysicsObject* object1 = m_actors[outer];
 			PhysicsObject* object2 = m_actors[inner];
 			int shapeID1 = object1->getShapeID();
 			int shapeID2 = object2->getShapeID();
 
+			// find the function in the collision function array
 			int functionID = (shapeID1 * SHAPE_COUNT) + shapeID2;
-			fn collisionFunction = collisionFunctions[functionID];
-			if (collisionFunction) {
-				collisionFunction(object1, object2);
+			fn collisionFunctionPtr = collisionFunctions[functionID];
+			if (collisionFunctionPtr != nullptr) {
+				// check collision
+				collisionFunctionPtr(object1, object2);
 			}
 		}
 	}
 }
 
-bool PhysicScene::planeToPlane(PhysicsObject* object1, PhysicsObject* object2)
-{
+bool PhysicScene::planeToPlane(PhysicsObject* object1, PhysicsObject* object2){
+
 	Plane* plane1 = dynamic_cast<Plane*>(object1);
 	Plane* plane2 = dynamic_cast<Plane*>(object2);
-
-	if (plane1 != nullptr && plane2 != nullptr){
-
-		return plane1->getNormal() != plane2->getNormal();
+	if (plane1 != nullptr && plane2 != nullptr) {
+		if (plane1->getNormal().x != plane2->getNormal().x || plane1->getNormal().y != plane2->getNormal().y) {
+			return true;
+		}
 	}
+	return false;
 }
 
-bool PhysicScene::planeToSphere(PhysicsObject* object1, PhysicsObject* object2)
-{
+bool PhysicScene::planeToSphere(PhysicsObject* object1, PhysicsObject* object2){
+
 	sphereToPlane(object2, object1);
 	return false;
 }
 
-bool PhysicScene::sphereToPlane(PhysicsObject* object1, PhysicsObject* object2)
-{
+bool PhysicScene::sphereToPlane(PhysicsObject* object1, PhysicsObject* object2){
+
 	Sphere* sphere = dynamic_cast<Sphere*>(object1);
 	Plane* plane = dynamic_cast<Plane*>(object2);
-
 	if (sphere != nullptr && plane != nullptr) {
-
-		float sphereToPlaneDistance = glm::dot(sphere->getPosition(), plane->getNormal() - plane->getDistance());
-
+		// calculate distance from sphere surface to plane surface
+		float sphereToPlaneDistance =
+			glm::dot(sphere->getPosition(), plane->getNormal())
+			- plane->getDistance();
+		// flip the normal if behind the plane
 		glm::vec2 collisionNormal = plane->getNormal();
 		if (sphereToPlaneDistance < 0) {
-			collisionNormal *= -1.f;
+			collisionNormal *= -1;
 			sphereToPlaneDistance *= -1;
 		}
 
 		sphereToPlaneDistance -= sphere->getRadius();
-
 		if (sphereToPlaneDistance <= 0) {
 
-			sphere->applyForce(collisionNormal * sphere->getMass());
-
+			plane->resolveCollision(sphere);
+			//sphere->applyForce(collisionNormal * sphere->getMass());
 			return true;
 		}
 	}
-
 	return false;
 }
 
-bool PhysicScene::sphereToSphere(PhysicsObject* object1, PhysicsObject* object2)
-{
+bool PhysicScene::sphereToSphere(PhysicsObject* object1, PhysicsObject* object2){
+
 	Sphere* sphere1 = dynamic_cast<Sphere*>(object1);
 	Sphere* sphere2 = dynamic_cast<Sphere*>(object2);
-
 	if (sphere1 != nullptr && sphere2 != nullptr) {
-
-		if (glm::distance(sphere1->getPosition(), sphere2->getPosition()) <= sphere1->getRotation() + sphere2->getRadius()) {
-
-			sphere1->applyForceToActor(sphere2, sphere1->getVelocity() * sphere1->getMass());
+		if (glm::distance(sphere1->getPosition(), sphere2->getPosition()) < sphere1->getRadius() + sphere2->getRadius()) {
+			
+			sphere1->resolveCollision(sphere2);
+			//sphere1->applyForceToActor(sphere2, sphere1->getVelocity() * sphere1->getMass());
 			return true;
 		}
 	}

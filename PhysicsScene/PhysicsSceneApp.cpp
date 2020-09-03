@@ -24,7 +24,7 @@ bool PhysicsSceneApp::startup() {
 	// the following path would be used instead: "./font/consolas.ttf"
 	m_font = new aie::Font("../bin/font/consolas.ttf", 32);
 
-	glm::vec2 gravity(0.f, -10.f);
+	glm::vec2 gravity(0.f, -70.f);
 	glm::vec2 initialPosition(-40.f, 0.f);
 	glm::vec2 initialVelocity(25.f, 25.f);
 
@@ -35,10 +35,19 @@ bool PhysicsSceneApp::startup() {
 	setUpContinuousDemo(initialPosition, initialVelocity, gravity);
 
 	Sphere* ball = new Sphere(initialPosition, initialVelocity, 1.f, 1.f, glm::vec4(1.f, 0.f, .5f, 1.f));
+
+	Sphere* ball1 = new Sphere(glm::vec2(-40.f, 0.f), glm::vec2(80.f, 0.f),
+		8.f, 8.f, glm::vec4(1, 0, 0, 1));
+
+	Sphere* ball2 = new Sphere(glm::vec2(40.f, 0.f), glm::vec2(-60.f, 0.f),
+		4.f, 4.f, glm::vec4(0, 1, 0, 1));
+	
 	Plane* floor = new Plane(glm::normalize(glm::vec2(1.f, -6.f)), 20.f);
 
+	//m_physicsScene->addActor(ball);
+	m_physicsScene->addActor(ball1);
+	m_physicsScene->addActor(ball2);
 	m_physicsScene->addActor(floor);
-	m_physicsScene->addActor(ball);
 
 	return true;
 }
