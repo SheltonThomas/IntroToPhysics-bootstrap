@@ -145,9 +145,9 @@ bool PhysicScene::sphereToPlane(PhysicsObject* object1, PhysicsObject* object2)
 
 	if (sphere != nullptr && plane != nullptr) {
 
-		glm::vec2 collisionNormal = plane->getNormal();
-		float sphereToPlaneDistance = glm::dot(sphere->getPosition(), collisionNormal - plane->getDistance());
+		float sphereToPlaneDistance = glm::dot(sphere->getPosition(), plane->getNormal() - plane->getDistance());
 
+		glm::vec2 collisionNormal = plane->getNormal();
 		if (sphereToPlaneDistance < 0) {
 			collisionNormal *= -1.f;
 			sphereToPlaneDistance *= -1;
@@ -155,9 +155,9 @@ bool PhysicScene::sphereToPlane(PhysicsObject* object1, PhysicsObject* object2)
 
 		sphereToPlaneDistance -= sphere->getRadius();
 
-		if (sphereToPlaneDistance <= 0){
+		if (sphereToPlaneDistance <= 0) {
 
-			sphere->applyForce(-sphere->getVelocity() * sphere->getMass());
+			sphere->applyForce(collisionNormal * sphere->getMass());
 
 			return true;
 		}
