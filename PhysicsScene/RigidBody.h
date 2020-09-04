@@ -36,7 +36,7 @@ protected:
 	float m_rotation;
 	float m_angularVelocity;
 	float m_moment;
-	float m_linearDrag = .3f;
+	float m_linearDrag = .5f;
 	float m_angularDrag = .3f;
 	float m_elasticity = .5f;
 };

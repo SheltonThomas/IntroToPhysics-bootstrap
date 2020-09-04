@@ -18,6 +18,8 @@ public:
 
 	void setUpContinuousDemo(glm::vec2 pos, glm::vec2 velocity, glm::vec2 gravity);
 
+	glm::vec2 calculateVelocity(glm::vec2 initialPosition, glm::vec2 finalPosition, float gravity, float time);
+
 protected:
 
 	aie::Renderer2D*	m_2dRenderer;

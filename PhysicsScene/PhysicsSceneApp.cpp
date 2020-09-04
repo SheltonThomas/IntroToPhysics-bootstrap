@@ -5,6 +5,7 @@
 #include <Gizmos.h>
 #include "Sphere.h"
 #include "Plane.h"
+#include "Rack.h"
 
 PhysicsSceneApp::PhysicsSceneApp() {
 
@@ -16,6 +17,7 @@ PhysicsSceneApp::~PhysicsSceneApp() {
 
 bool PhysicsSceneApp::startup() {
 	
+	
 	aie::Gizmos::create(255U, 255U, 65535U, 65535U);
 
 	m_2dRenderer = new aie::Renderer2D();
@@ -24,30 +26,39 @@ bool PhysicsSceneApp::startup() {
 	// the following path would be used instead: "./font/consolas.ttf"
 	m_font = new aie::Font("../bin/font/consolas.ttf", 32);
 
-	glm::vec2 gravity(0.f, -70.f);
-	glm::vec2 initialPosition(-40.f, 0.f);
-	glm::vec2 initialVelocity(25.f, 25.f);
+	glm::vec2 gravity(0.f, 0.f);
 
 	m_physicsScene = new PhysicScene();
 	m_physicsScene->setTimStep(.01f);
 	m_physicsScene->setGravity(gravity);
 
-	setUpContinuousDemo(initialPosition, initialVelocity, gravity);
+	Plane* wall1 = new Plane(glm::vec2(0, 1), 50);
+	Plane* wall2 = new Plane(glm::vec2(0, 1), -50);
+	Plane* wall3 = new Plane(glm::vec2(1, 0), 90);
+	Plane* wall4 = new Plane(glm::vec2(1, 0), -90);
 
-	Sphere* ball = new Sphere(initialPosition, initialVelocity, 1.f, 1.f, glm::vec4(1.f, 0.f, .5f, 1.f));
 
-	Sphere* ball1 = new Sphere(glm::vec2(-40.f, 0.f), glm::vec2(80.f, 0.f),
-		8.f, 8.f, glm::vec4(1, 0, 0, 1));
+	float ballScalar = 2.5f;
+	float cueBallSize = 1.7f * ballScalar;
+	float ballSize = 1.6f * ballScalar;
+	glm::vec4 cueBallColor(1, 1, 1, 1);
+	glm::vec2 cueBallStartingVelocity(0, 0);
 
-	Sphere* ball2 = new Sphere(glm::vec2(40.f, 0.f), glm::vec2(-60.f, 0.f),
-		4.f, 4.f, glm::vec4(0, 1, 0, 1));
-	
-	Plane* floor = new Plane(glm::normalize(glm::vec2(1.f, -6.f)), 20.f);
+	glm::vec2 zeroVector(0, 0);
+	glm::vec4 ballsColor(0, 0, 1, 1);
+	glm::vec2 ballsStartingPosition(25, 0);
 
-	//m_physicsScene->addActor(ball);
-	m_physicsScene->addActor(ball1);
-	m_physicsScene->addActor(ball2);
-	m_physicsScene->addActor(floor);
+	Sphere* cueBall = new Sphere(glm::vec2(-50, 0), cueBallStartingVelocity, cueBallSize, cueBallColor);
+	glm::vec2 newPosition(25, 0); 
+	Rack rack = Rack(15, ballSize, ballsStartingPosition, m_physicsScene);
+
+
+	m_physicsScene->addActor(cueBall);
+
+	m_physicsScene->addActor(wall1);
+	m_physicsScene->addActor(wall2);
+	m_physicsScene->addActor(wall3);
+	m_physicsScene->addActor(wall4);
 
 	return true;
 }
@@ -112,4 +123,14 @@ void PhysicsSceneApp::setUpContinuousDemo(glm::vec2 initialPosition, glm::vec2 i
 		aie::Gizmos::add2DCircle(finalPosition, radius, segments, color);
 		time += timeStep;
 	}
+}
+
+glm::vec2 PhysicsSceneApp::calculateVelocity(glm::vec2 initialPosition, glm::vec2 finalPosition, float gravity, float time)
+{
+	glm::vec2 initialVelocity = glm::vec2(0, 0);
+
+	initialVelocity.x = (finalPosition.x - initialPosition.x) / time;
+	initialVelocity.y = (finalPosition.y - initialPosition.y - (0.5f * gravity * (time * time)) / time);
+
+	return initialVelocity;
 }

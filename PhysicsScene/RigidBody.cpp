@@ -16,10 +16,10 @@ void RigidBody::fixedUpdate(glm::vec2 gravity, float timeStep){
 
 	applyForce(gravity * m_mass * timeStep, m_position);
 
-	if (glm::length(m_velocity) < .01f)
+	if (glm::length(m_velocity) < .5f)
 		m_velocity = glm::vec2(0, 0);
 
-	if (glm::abs(m_angularVelocity) < .01f)
+	if (glm::abs(m_angularVelocity) < .5f)
 		m_angularVelocity = 0;
 
 	m_velocity -= m_velocity * m_linearDrag * timeStep;

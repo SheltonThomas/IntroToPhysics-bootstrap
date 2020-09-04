@@ -166,8 +166,8 @@
     <ClCompile Include="PhysicsSceneApp.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Plane.cpp" />
+    <ClCompile Include="Rack.cpp" />
     <ClCompile Include="RigidBody.cpp" />
-    <ClCompile Include="Rocket.cpp" />
     <ClCompile Include="Sphere.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -175,8 +175,8 @@
     <ClInclude Include="PhysicsObject.h" />
     <ClInclude Include="PhysicsSceneApp.h" />
     <ClInclude Include="Plane.h" />
+    <ClInclude Include="Rack.h" />
     <ClInclude Include="RigidBody.h" />
-    <ClInclude Include="Rocket.h" />
     <ClInclude Include="Sphere.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
