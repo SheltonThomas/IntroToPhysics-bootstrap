@@ -11,7 +11,7 @@ Sphere::Sphere(glm::vec2 position, glm::vec2 velocity, float mass, float radius,
 
 void Sphere::makeGizmo() {
 
-	aie::Gizmos::add2DCircle(m_position, m_radius, 12, m_color);
+	aie::Gizmos::add2DCircle(m_position, m_radius, 500, m_color);
 }
 
 void Sphere::fixedUpdate(glm::vec2 gravity, float timeStep)

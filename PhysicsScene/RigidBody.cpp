@@ -43,7 +43,7 @@ void RigidBody::resolveCollision(RigidBody* other, glm::vec2 contact, glm::vec2*
 	// collisionNormal? checks to see if collisionNormal variable is null
 	glm::vec2 normal = glm::normalize(collisionNormal ? *collisionNormal
 		: other->m_position - m_position);
-	glm::vec2 perpendicular(normal.x, normal.y);
+	glm::vec2 perpendicular(normal.y, -normal.x);
 
 	float radius = glm::dot(contact - m_position, -perpendicular);
 	float otherRadius = glm::dot(contact - other->m_position, perpendicular);
