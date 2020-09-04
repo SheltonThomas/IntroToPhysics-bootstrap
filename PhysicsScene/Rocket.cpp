@@ -19,6 +19,6 @@ void Rocket::fixedUpdate(glm::vec2 gravity, float timeStep){
 
 void Rocket::propulse(){
     
-    applyForce(glm::vec2(0, m_power));
+    //applyForce(glm::vec2(0, m_power));
     m_fuel -= m_fuelUsageRate;
 }

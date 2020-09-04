@@ -3,6 +3,7 @@
 #include "Sphere.h"
 #include "Plane.h"
 #include <list>
+#include <iostream>
 
 PhysicScene::PhysicScene(){
 
@@ -134,7 +135,8 @@ bool PhysicScene::sphereToPlane(PhysicsObject* object1, PhysicsObject* object2){
 		sphereToPlaneDistance -= sphere->getRadius();
 		if (sphereToPlaneDistance <= 0) {
 
-			plane->resolveCollision(sphere);
+			glm::vec2 contact = sphere->getPosition() + (collisionNormal * -sphere->getRadius());
+			plane->resolveCollision(sphere, contact);
 			//sphere->applyForce(collisionNormal * sphere->getMass());
 			return true;
 		}
@@ -146,10 +148,16 @@ bool PhysicScene::sphereToSphere(PhysicsObject* object1, PhysicsObject* object2)
 
 	Sphere* sphere1 = dynamic_cast<Sphere*>(object1);
 	Sphere* sphere2 = dynamic_cast<Sphere*>(object2);
+
+	//std::cout << sphere1->getVelocity().x << " " << sphere2->getVelocity().y << std::endl;
 	if (sphere1 != nullptr && sphere2 != nullptr) {
 		if (glm::distance(sphere1->getPosition(), sphere2->getPosition()) < sphere1->getRadius() + sphere2->getRadius()) {
 			
-			sphere1->resolveCollision(sphere2);
+			glm::vec2 contact = (sphere1->getPosition() + sphere2->getPosition()) * .5f;
+
+			//std::cout << sphere1->getVelocity().x << " " << sphere2->getVelocity().y << std::endl;
+
+			sphere1->resolveCollision(sphere2, contact);
 			//sphere1->applyForceToActor(sphere2, sphere1->getVelocity() * sphere1->getMass());
 			return true;
 		}

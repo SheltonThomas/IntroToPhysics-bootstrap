@@ -6,6 +6,7 @@ Sphere::Sphere(glm::vec2 position, glm::vec2 velocity, float mass, float radius,
 
 	m_radius = radius;
 	m_color = color;
+	m_moment = .5f * mass * radius * radius;
 }
 
 void Sphere::makeGizmo() {
@@ -23,7 +24,7 @@ bool Sphere::checkCollision(PhysicsObject* otherActor)
 	Sphere* otherSphere = dynamic_cast<Sphere*>(otherActor);
 
 	if (otherSphere) {
-		return glm::distance(m_position, otherSphere->getPosition()) <= m_radius + otherSphere->getRadius();
+		return glm::distance(m_position, otherSphere->getPosition()) < m_radius + otherSphere->getRadius();
 	}
 
 	return false;

@@ -3,7 +3,7 @@
 #include "Font.h"
 #include "Input.h"
 #include <Gizmos.h>
-#include "Rocket.h"
+#include "Sphere.h"
 #include "Plane.h"
 
 PhysicsSceneApp::PhysicsSceneApp() {
@@ -83,8 +83,8 @@ void PhysicsSceneApp::draw() {
 
 	// draw your stuff here!
 	static float aspectRatio = 16.f / 9.f;
-	aie::Gizmos::draw2D(glm::ortho<float>(-100, 100,
-		-100 / aspectRatio, 100 / aspectRatio, -1.0f, 1.0f));
+	aie::Gizmos::draw2D(glm::ortho<float>(-100, 100, -100 / aspectRatio, 
+		100 / aspectRatio, -1.0f, 1.0f));
 
 	// output some text, uses the last used colour
 	m_2dRenderer->drawText(m_font, "Press ESC to quit", 0, 0);
