@@ -17,7 +17,7 @@ public:
 	void setGravity(const glm::vec2 gravity) { m_gravity = gravity; }
 	glm::vec2 getGravity() const { return m_gravity; }
 
-	void setTimStep(const float timeStep) { m_timeStep = timeStep; }
+	void setTimeStep(const float timeStep) { m_timeStep = timeStep; }
 	float getTimeStep() const { return m_timeStep; }
 
 	void debugScene();

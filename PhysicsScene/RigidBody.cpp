@@ -14,19 +14,22 @@ RigidBody::RigidBody(ShapeType shapeID, glm::vec2 position, glm::vec2 velocity, 
 
 void RigidBody::fixedUpdate(glm::vec2 gravity, float timeStep){
 
+	//apply gravity
 	applyForce(gravity * m_mass * timeStep, m_position);
 
+
+	//clamp drag
 	if (glm::length(m_velocity) < .5f)
 		m_velocity = glm::vec2(0, 0);
 
 	if (glm::abs(m_angularVelocity) < .5f)
 		m_angularVelocity = 0;
 
+	//calcualte linear movement.
 	m_velocity -= m_velocity * m_linearDrag * timeStep;
 	m_position += m_velocity * timeStep;
 
-	//std::cout << m_velocity.x << " " << m_velocity.y << std::endl;
-
+	//Calculate angular movement
 	m_angularVelocity -= m_angularVelocity * m_angularDrag * timeStep;
 	m_rotation += m_angularVelocity * timeStep;
 
@@ -34,6 +37,7 @@ void RigidBody::fixedUpdate(glm::vec2 gravity, float timeStep){
 
 void RigidBody::applyForce(glm::vec2 force, glm::vec2 position){
 
+	//Calculate the change in velocity
 	m_velocity += force / m_mass;
 	m_angularVelocity += (force.y * position.x - force.x * position.y) / m_moment;
 }
@@ -41,29 +45,40 @@ void RigidBody::applyForce(glm::vec2 force, glm::vec2 position){
 void RigidBody::resolveCollision(RigidBody* other, glm::vec2 contact, glm::vec2* collisionNormal){
 
 	// collisionNormal? checks to see if collisionNormal variable is null
+
+	//Use or assign the collision normal
 	glm::vec2 normal = glm::normalize(collisionNormal ? *collisionNormal
 		: other->m_position - m_position);
+
+	//Find the perpendicular to the collision normal
 	glm::vec2 perpendicular(normal.y, -normal.x);
 
+	//Find the radii from axes to application of force
 	float radius = glm::dot(contact - m_position, -perpendicular);
 	float otherRadius = glm::dot(contact - other->m_position, perpendicular);
 
+	//Find the velocities of the contact point for each object
 	float velocity = glm::dot(m_velocity, normal) - radius * m_angularVelocity;
-
 	float otherVelocity = glm::dot(other->m_velocity, normal) + otherRadius * other->m_angularVelocity;
 
+	//If the objects are moving apart ignore the collision
 	if (velocity <= otherVelocity) return;
 
+	//Find the effective mass at contact point for each object
 	float mass = 1.0f / (1.0f / getMass() + (radius * radius) / getMoment());
 	float otherMass = 1.0f / (1.0f / other->getMass() + (otherRadius * otherRadius) / other->getMoment());
 
+	//Find the average elasticity
 	float elasticity = (m_elasticity + other->m_elasticity) / 2;
 
+	//Find the impulse
 	float j = (1.0f + elasticity) * mass * otherMass /
 		(mass + otherMass) * (velocity - otherVelocity);
 
+	//Find the force
 	glm::vec2 force = normal * j;
 
+	//Apply equal and opposite forces
 	other->applyForce(force, contact - other->m_position);
 	applyForce(-force, contact - m_position);
 }

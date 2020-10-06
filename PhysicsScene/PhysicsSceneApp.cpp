@@ -17,7 +17,7 @@ PhysicsSceneApp::~PhysicsSceneApp() {
 
 bool PhysicsSceneApp::startup() {
 	
-	
+	// increase the 2D line count to maximize the number of objects we can draw
 	aie::Gizmos::create(255U, 255U, 65535U, 65535U);
 
 	m_2dRenderer = new aie::Renderer2D();
@@ -26,18 +26,22 @@ bool PhysicsSceneApp::startup() {
 	// the following path would be used instead: "./font/consolas.ttf"
 	m_font = new aie::Font("../bin/font/consolas.ttf", 32);
 
+	//Initialize gravity and the physics scene
+
 	glm::vec2 gravity(0.f, 0.f);
 
 	m_physicsScene = new PhysicScene();
-	m_physicsScene->setTimStep(.01f);
+	m_physicsScene->setTimeStep(.01f);
 	m_physicsScene->setGravity(gravity);
 
+
+	//Create the wall.
 	Plane* wall1 = new Plane(glm::vec2(0, 1), 50);
 	Plane* wall2 = new Plane(glm::vec2(0, 1), -50);
 	Plane* wall3 = new Plane(glm::vec2(1, 0), 90);
 	Plane* wall4 = new Plane(glm::vec2(1, 0), -90);
 
-
+	//Ball information
 	float ballScalar = 2.5f;
 	float cueBallSize = 1.7f * ballScalar;
 	float ballSize = 1.6f * ballScalar;
@@ -48,10 +52,11 @@ bool PhysicsSceneApp::startup() {
 	glm::vec4 ballsColor(0, 0, 1, 1);
 	glm::vec2 ballsStartingPosition(25, 0);
 
+	//Create ball and rack
 	Sphere* cueBall = new Sphere(glm::vec2(-50, 0), cueBallStartingVelocity, cueBallSize, cueBallColor);
-	glm::vec2 newPosition(25, 0); 
 	Rack rack = Rack(15, ballSize, ballsStartingPosition, m_physicsScene);
 
+	//add the ball and walls to the scene.
 
 	m_physicsScene->addActor(cueBall);
 
