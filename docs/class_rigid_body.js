@@ -1,7 +1,6 @@
 var class_rigid_body =
 [
     [ "RigidBody", "class_rigid_body.html#a3e3065fe0fc171d9fad623b39fef10b4", null ],
-    [ "~RigidBody", "class_rigid_body.html#a4eade6e08e5a78c56822d2f42322c915", null ],
     [ "applyForce", "class_rigid_body.html#ad67ea5643e3b67a2cc6677d83f6416f0", null ],
     [ "checkCollision", "class_rigid_body.html#ae3ebca33f9544ae40c72bf9f1945be8a", null ],
     [ "debug", "class_rigid_body.html#a2746e7f16edaf4db71850846d0d9ff6b", null ],

@@ -14,6 +14,5 @@ var searchData=
   ['sphere_2eh_84',['Sphere.h',['../_sphere_8h.html',1,'']]],
   ['spheretoplane_85',['sphereToPlane',['../class_physic_scene.html#ac1cb64fe034e176d8e534939582acbc9',1,'PhysicScene']]],
   ['spheretosphere_86',['sphereToSphere',['../class_physic_scene.html#a66bb97aa9e1ff62b4bb0375c50b3b0e7',1,'PhysicScene']]],
-  ['square_87',['SQUARE',['../_physics_object_8h.html#a5a4538eeab397888d88a4eefcc5a1345a4233fbf0cafb86abcee94b38d769fc59',1,'PhysicsObject.h']]],
-  ['startup_88',['startup',['../class_physics_scene_app.html#acc7a4b3bb092d76145b027fdaa6e56b4',1,'PhysicsSceneApp']]]
+  ['startup_87',['startup',['../class_physics_scene_app.html#acc7a4b3bb092d76145b027fdaa6e56b4',1,'PhysicsSceneApp']]]
 ];

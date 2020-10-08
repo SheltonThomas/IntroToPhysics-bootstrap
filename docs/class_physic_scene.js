@@ -1,7 +1,6 @@
 var class_physic_scene =
 [
     [ "PhysicScene", "class_physic_scene.html#a4f01606d250d2f8a742fb7488f2d84a5", null ],
-    [ "~PhysicScene", "class_physic_scene.html#a7268eb8f7361fd7ad679d51cd441ac15", null ],
     [ "addActor", "class_physic_scene.html#a91ebeac6bcbea3cc64845b358578fe82", null ],
     [ "checkForCollision", "class_physic_scene.html#acdccc254e113a4672020940c2f252661", null ],
     [ "debugScene", "class_physic_scene.html#abadc57a19b0a1e59c3f4e0a604dcff10", null ],

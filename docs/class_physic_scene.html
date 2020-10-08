@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Intro To Physics: PhysicScene Class Reference</title>
+<title>Physics Assessment: PhysicScene Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Intro To Physics
+   <div id="projectname">Physics Assessment
    </div>
   </td>
  </tr>
@@ -97,8 +97,6 @@ $(document).ready(function(){initNavTree('class_physic_scene.html',''); initResi
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a4f01606d250d2f8a742fb7488f2d84a5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_physic_scene.html#a4f01606d250d2f8a742fb7488f2d84a5">PhysicScene</a> ()</td></tr>
 <tr class="separator:a4f01606d250d2f8a742fb7488f2d84a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7268eb8f7361fd7ad679d51cd441ac15"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_physic_scene.html#a7268eb8f7361fd7ad679d51cd441ac15">~PhysicScene</a> ()</td></tr>
-<tr class="separator:a7268eb8f7361fd7ad679d51cd441ac15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91ebeac6bcbea3cc64845b358578fe82"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_physic_scene.html#a91ebeac6bcbea3cc64845b358578fe82">addActor</a> (<a class="el" href="class_physics_object.html">PhysicsObject</a> *actor)</td></tr>
 <tr class="separator:a91ebeac6bcbea3cc64845b358578fe82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a068d95bbd9dac4da90939db8577f28b5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_physic_scene.html#a068d95bbd9dac4da90939db8577f28b5">removeActor</a> (<a class="el" href="class_physics_object.html">PhysicsObject</a> *actor)</td></tr>
@@ -140,7 +138,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:a47fad50f01973d14de69cc82290bb3ba"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_physics_object.html">PhysicsObject</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_physic_scene.html#a47fad50f01973d14de69cc82290bb3ba">m_actors</a></td></tr>
 <tr class="separator:a47fad50f01973d14de69cc82290bb3ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class that controls everything that happens. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a4f01606d250d2f8a742fb7488f2d84a5"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4f01606d250d2f8a742fb7488f2d84a5">&#9670;&nbsp;</a></span>PhysicScene()</h2>
 
@@ -155,23 +155,7 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a id="a7268eb8f7361fd7ad679d51cd441ac15"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7268eb8f7361fd7ad679d51cd441ac15">&#9670;&nbsp;</a></span>~PhysicScene()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">PhysicScene::~PhysicScene </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p>Constructor for the class. </p>
 
 </div>
 </div>
@@ -191,6 +175,7 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Adds an actor to the scene. </p>
 
 </div>
 </div>
@@ -208,6 +193,7 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Checks to see if any of the objects on the scene are colliding. </p>
 
 </div>
 </div>
@@ -225,6 +211,7 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Not Used </p>
 
 </div>
 </div>
@@ -250,6 +237,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Gets the gravity of the scene. </p>
 
 </div>
 </div>
@@ -275,6 +263,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Gets the time step of the scene. </p>
 
 </div>
 </div>
@@ -311,6 +300,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p><a class="el" href="class_plane.html">Plane</a> to plane collision. </p>
 
 </div>
 </div>
@@ -347,6 +337,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p><a class="el" href="class_plane.html">Plane</a> to sphere collision. </p>
 
 </div>
 </div>
@@ -365,6 +356,7 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Removes an actor to the scene. </p>
 
 </div>
 </div>
@@ -391,6 +383,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Sets the gravity that is applied to all the actors on the scene. </p>
 
 </div>
 </div>
@@ -417,6 +410,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Sets the time step for the fixed update function. </p>
 
 </div>
 </div>
@@ -453,6 +447,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p><a class="el" href="class_sphere.html">Sphere</a> to plane collision. </p>
 
 </div>
 </div>
@@ -489,6 +484,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p><a class="el" href="class_sphere.html">Sphere</a> to sphere collision. </p>
 
 </div>
 </div>
@@ -507,6 +503,7 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Updates all the actors on the scene. </p>
 
 </div>
 </div>
@@ -524,6 +521,7 @@ Protected Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Draws all the actors. </p>
 
 </div>
 </div>
@@ -547,6 +545,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Actors on the scene. </p>
 
 </div>
 </div>
@@ -569,6 +568,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Gravity of the scene. </p>
 
 </div>
 </div>
@@ -591,6 +591,7 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p>Time step of the scene. </p>
 
 </div>
 </div>

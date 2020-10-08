@@ -1,7 +1,6 @@
 var class_sphere =
 [
     [ "Sphere", "class_sphere.html#a66469a9591ca937e0416880f45f5ce78", null ],
-    [ "~Sphere", "class_sphere.html#a569c071e50a3e11f678630ee1a17737e", null ],
     [ "checkCollision", "class_sphere.html#ab02f378a8a5e77f80d5172bb264982d5", null ],
     [ "fixedUpdate", "class_sphere.html#a975b396989b9dee51a5c00f5242cb371", null ],
     [ "getColor", "class_sphere.html#a325e19bb649639046df891485b9df435", null ],

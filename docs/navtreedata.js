@@ -24,7 +24,7 @@
 */
 var NAVTREE =
 [
-  [ "Intro To Physics", "index.html", [
+  [ "Physics Assessment", "index.html", [
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],

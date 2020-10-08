@@ -2,7 +2,6 @@ var class_plane =
 [
     [ "Plane", "class_plane.html#acac0d9c003e0ab10d07b146c3566a0c7", null ],
     [ "Plane", "class_plane.html#a635d8b12b1996b808a2951d961cf7845", null ],
-    [ "~Plane", "class_plane.html#a69abd86051c880dcb44b249ad10c4436", null ],
     [ "debug", "class_plane.html#a86ce7f8d034c0958e6632dfe8b05cd26", null ],
     [ "fixedUpdate", "class_plane.html#a5c182dc7bd835996cbaa1eec476e3b7d", null ],
     [ "getDistance", "class_plane.html#a3d68cb63e77f29157252a41659e6fa5b", null ],
